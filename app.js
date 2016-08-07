@@ -1,7 +1,9 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = new express();
 
+app.use(bodyParser.json()); // 解析 application/json 类型数据
 app.use(express.static('./views'));
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -13,6 +15,8 @@ const dbControl = require('./routes/db.js');
 
 app.get('/db',dbControl.remove);
 
-app.get('/a', function (req,res) {
-  res.send("我是后台数据");
-});
+app.get('/items', dbControl.findAll);
+
+app.post('/items', dbControl.save)
+
+app.delete('/items');

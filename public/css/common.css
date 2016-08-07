@@ -1,0 +1,102 @@
+span {
+    font-size: 23px;
+    color: darkgrey;
+    vertical-align: middle;
+}
+
+.wrap {
+    margin-top: 20px;
+}
+
+.header h1 {
+    text-align: center;
+    font-size: 70px;
+    color: #e4b9b9;
+}
+
+.header input {
+    padding: 30px 50px;
+    font-size: 25px;
+}
+
+.header span {
+    position: relative;
+    top: 50px;
+    left: 20px;
+    font-size: 25px;
+}
+
+.item {
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #d1d0d0;
+    border-top: none;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.item input {
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 1px solid darkgrey;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+}
+
+.item input[checked=true] .itemTitle{
+    text-decoration: line-through;
+}
+
+.itemTitle{
+
+}
+
+.item .delete {
+    float: right;
+    position: relative;
+    top: 12px;
+}
+
+.items-footer {
+    box-shadow: 3px 3px 3px #d1d0d0;
+}
+
+.footer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid #d1d0d0;
+}
+
+.footer span {
+    padding: 3px 5px;
+    font-size: 15px;
+    color: dimgrey;
+}
+
+.footer span:hover {
+    border: 1px solid #dedddd;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.footer span:visited {
+
+}
+
+.footer .leftItem{
+    border: none;
+    margin-left: 10px;
+    margin-right: 5px;
+    text-decoration: none;
+    cursor: default;
+    color: dimgrey;
+}
+
+.footer .clearCompleted {
+    display: inline-block;
+    position: relative;
+    right: -30px;
+    color: dimgrey;
+    cursor: pointer;
+}
