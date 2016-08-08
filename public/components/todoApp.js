@@ -8,7 +8,7 @@ const App = React.createClass({
   },
   componentDidMount: function () {
     $.get('/items').then(data => {
-      console.log(data);
+      // console.log(data);
       this.setState({items: data});
       this.setState({parms: this.state.items});
     });
@@ -32,6 +32,7 @@ const App = React.createClass({
         contentType: 'application/json',
         data: JSON.stringify(item),
         success: function (data) {
+
         }
       })
     }
@@ -75,7 +76,7 @@ const App = React.createClass({
   ,
   chooseAll: function () {
     const items = this.state.items.map((item)=> {
-      item.isChose = item.isChose ? false : true;
+      item.isChose = !item.isChose
       return item;
     })
     this.setState({items});

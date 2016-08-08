@@ -60,8 +60,6 @@ const insertItem = function (db, item, callback) {
   const collection = db.collection('items');
   collection.insert([item], function (err, result) {
     assert.equal(null, err);
-    // assert.equal(3, result.result.n);
-    // assert.equal(3, result.ops.length);
     callback(result);
   });
 };
@@ -75,7 +73,7 @@ const updateItems = function (db, callback) {
   });
 };
 
-const deleteItems = function (db, callback) {
+const deleteItems = function (db, callback) {  
   const collection = db.collection('items');
   collection.deleteOne({a: 1}, function (err, result) {
     callback(result);
