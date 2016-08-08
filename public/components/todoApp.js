@@ -8,6 +8,7 @@ const App = React.createClass({
   },
   componentDidMount: function () {
     $.get('/items').then(data => {
+      console.log(data);
       this.setState({items: data});
       this.setState({parms: this.state.items});
     });
@@ -23,8 +24,7 @@ const App = React.createClass({
       this.setState({items});
       this.setState({parms: this.state.items});
       // console.log(item);
-      // $.post('/items',JSON.stringify(item), function (data) {
-      //   console.log(item);
+      // $.post('/items',{data:JSON.stringify(item)}, function (data) {
       // },"json")
       $.ajax({
         type: "POST",
@@ -32,7 +32,6 @@ const App = React.createClass({
         contentType: 'application/json',
         data: JSON.stringify(item),
         success: function (data) {
-          // console.log(data);
         }
       })
     }

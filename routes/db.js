@@ -33,7 +33,8 @@ exports.Update = function (req, res) {
 
   MongoClient.connect(url, function (err, db) {
     assert.equal(null, err);
-    updateItems(db, function () {
+    const items = req.body
+    updateItems(db, items, function () {
       db.close();
     });
     res.send('我是后台数据');
@@ -46,10 +47,9 @@ exports.remove = function (req, res) {
 
   MongoClient.connect(url, function (err, db) {
     assert.equal(null, err);
-    console.log("Connected correctly to server");
-    deleteDocument(db, function () {
+    const items = req.body;
+    deleteItems(db, items, function () {
       db.close();
-      console.log("Closed correctly to server");
     });
     res.send('我是后台数据');
   });
@@ -68,21 +68,16 @@ const insertItem = function (db, item, callback) {
 
 const updateItems = function (db, callback) {
   const collection = db.collection('items');
-  // Update document where a is 2, set b equal to 1
   collection.update({a: 2}, {$set: {b: 2}}, function (err, result) {
     assert.equal(err, null);
     assert.equal(1, result.result.n);
-    console.log("Updated the document with the field a equal to 2");
     callback(result);
   });
 };
 
-const deleteDocument = function (db, callback) {
+const deleteItems = function (db, callback) {
   const collection = db.collection('items');
-  // Insert some documents
   collection.deleteOne({a: 1}, function (err, result) {
-    // assert.equal(err, null);
-    // assert.equal(1, result.result.n);
     callback(result);
   });
 };
@@ -91,8 +86,6 @@ const findItems = function (db, callback) {
   const collection = db.collection('items');
   collection.find({}).toArray(function (err, docs) {
     assert.equal(err, null);
-    // assert.equal(11, docs.length);
-    // console.dir(docs);
     callback(docs);
   });
 };
