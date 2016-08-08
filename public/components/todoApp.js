@@ -36,80 +36,80 @@ const App = React.createClass({
       })
     }
   },
-    change: function (event) {
-      this.setState({input: event.target.value});
+  change: function (event) {
+    this.setState({input: event.target.value});
+  }
+  ,
+  remove: function (i) {
+    this.state.items.splice(i, 1);
+    this.setState({items: this.state.items});
+    this.setState({parms: this.state.items});
+  }
+  ,
+  exchange: function (i) {
+    const item = this.state.items[i];
+    item.isChose = !item.isChose;
+    this.setState({items: this.state.items});
+    this.setState({parms: this.state.items});
+  }
+  ,
+  completed: function () {
+    const parms = this.state.items.filter((item)=>item.isChose)
+    this.setState({parms});
+  }
+  ,
+  active: function () {
+    const parms = this.state.items.filter((item)=>!item.isChose)
+    this.setState({parms});
+  }
+  ,
+  all: function () {
+    this.setState({parms: this.state.items});
+  }
+  ,
+  clearCompleted: function () {
+    const items = this.state.items.filter((item)=>!item.isChose)
+    this.setState({items});
+    this.setState({parms: items});
+  }
+  ,
+  chooseAll: function () {
+    const items = this.state.items.map((item)=> {
+      item.isChose = item.isChose ? false : true;
+      return item;
+    })
+    this.setState({items});
+  }
+  ,
+  render: function () {
+    let footer;
+    if (this.state.items.length > 0) {
+      footer =
+        <Footer items={this.state.parms}
+                onCompleted={this.completed}
+                onActive={this.active}
+                onAll={this.all}
+                onClearCompleted={this.clearCompleted}/>
     }
-    ,
-    remove: function (i) {
-      this.state.items.splice(i, 1);
-      this.setState({items: this.state.items});
-      this.setState({parms: this.state.items});
-    }
-    ,
-    exchange: function (i) {
-      const item = this.state.items[i];
-      item.isChose = !item.isChose;
-      this.setState({items: this.state.items});
-      this.setState({parms: this.state.items});
-    }
-    ,
-    completed: function () {
-      const parms = this.state.items.filter((item)=>item.isChose)
-      this.setState({parms});
-    }
-    ,
-    active: function () {
-      const parms = this.state.items.filter((item)=>!item.isChose)
-      this.setState({parms});
-    }
-    ,
-    all: function () {
-      this.setState({parms: this.state.items});
-    }
-    ,
-    clearCompleted: function () {
-      const items = this.state.items.filter((item)=>!item.isChose)
-      this.setState({items});
-      this.setState({parms: items});
-    }
-    ,
-    chooseAll: function () {
-      const items = this.state.items.map((item)=> {
-        item.isChose = item.isChose ? false : true;
-        return item;
-      })
-      this.setState({items});
-    }
-    ,
-    render: function () {
-      let footer;
-      if (this.state.items.length > 0) {
-        footer =
-          <Footer items={this.state.parms}
-                  onCompleted={this.completed}
-                  onActive={this.active}
-                  onAll={this.all}
-                  onClearCompleted={this.clearCompleted}/>
-      }
 
-      return <div className="col-md-4 col-md-offset-4 wrap">
-        <div className="header">
-          <h1>todos</h1>
-          <span onClick={this.chooseAll} className="glyphicon glyphicon-chevron-down"></span>
-          <input className="form-control"
-                 placeholder="What needs to be done?"
-                 type="text"
-                 value={this.state.input}
-                 onKeyDown={this.add}
-                 onChange={this.change}/>
-        </div>
-        <div className="items-footer">
-          <Items items={this.state.parms} onRemove={this.remove} onExchange={this.exchange}/>
-          {footer}
-        </div>
+    return <div className="col-md-4 col-md-offset-4 wrap">
+      <div className="header">
+        <h1>todos</h1>
+        <span onClick={this.chooseAll} className="glyphicon glyphicon-chevron-down"></span>
+        <input className="form-control"
+               placeholder="What needs to be done?"
+               type="text"
+               value={this.state.input}
+               onKeyDown={this.add}
+               onChange={this.change}/>
       </div>
-    }
-  })
+      <div className="items-footer">
+        <Items items={this.state.parms} onRemove={this.remove} onExchange={this.exchange}/>
+        {footer}
+      </div>
+    </div>
+  }
+})
 
 const Items = React.createClass({
   remove: function (i) {
